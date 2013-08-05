@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>BBSExample</display-name>
+	<!--(서블릿에서 직접 실행명령을 내릴 클래스들 지정한다. -->
+	<!-- 패키지명도 같이 입력해야 한다. -->
+	<welcome-file-list>
+		<welcome-file>list.hs</welcome-file>
+		<welcome-file>list.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<!-- 서블릿 클래스의 별명 -->
+		<servlet-name>BBS</servlet-name>
+		<!-- 실제 서블릿 클래스 -->
+		<servlet-class>hs.bbs.servlet.HSServlet</servlet-class>
+		<init-param>
+			<param-name>propertiesPath</param-name>
+			<param-value>D:\\Developer\\jeong-workspace\\EE\\BBSExample\\WebContent\\bbs.properties</param-value>
+		</init-param>
+	</servlet>
+	<!-- 서블릿이 과 맵핑 -->
+	<servlet-mapping>
+		<servlet-name>BBS</servlet-name>
+		<url-pattern>*.hs</url-pattern>
+	</servlet-mapping>
+</web-app>
