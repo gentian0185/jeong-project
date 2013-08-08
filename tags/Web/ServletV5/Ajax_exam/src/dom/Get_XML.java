@@ -1,14 +1,9 @@
-package Human;
+package dom;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
 
 public class Get_XML {	
     Connection con;
@@ -19,15 +14,15 @@ public class Get_XML {
 	public StringBuffer getXml(){
 		try{
 		Class.forName("oracle.jdbc.driver.OracleDriver");		
-		String url = "jdbc:oracle:thin:@127.0.0.1:1521:human";
-		con =DriverManager.getConnection(url,"human","1234");		
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
+		con =DriverManager.getConnection(url,"bbs","1234");		
 	
-		String sqlStr = "SELECT * FROM login";
+		String sqlStr = "SELECT * FROM user_table";
 		pstmt = con.prepareStatement(sqlStr);
 		ResultSet rs = pstmt.executeQuery();
 		sb=new StringBuffer();
 		sb.append("<?xml version='1.0' encoding='utf-8' ?>\n");
-		sb.append("<human>\n");
+		sb.append("<bbs>\n");
 				
 		while(rs.next()){			
 			sb.append("<Member>\n");
@@ -35,7 +30,7 @@ public class Get_XML {
 			sb.append("<pass>"+rs.getString("pass")+"</pass>\n");
 			sb.append("</Member>\n");
 		}
-		sb.append("</human>");				
+		sb.append("</bbs>");				
 		rs.close();
 		pstmt.close();
 		con.close();		

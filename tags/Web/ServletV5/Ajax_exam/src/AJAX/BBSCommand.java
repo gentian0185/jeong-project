@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,36 +15,30 @@ import javax.servlet.http.HttpServletResponse;
 
 public class BBSCommand extends HttpServlet {
   private static final long serialVersionUID = 1L; 
-    private Map commandMap = new HashMap();//¸í·É¾î¿Í ¸í·É¾î Ã³¸® Å¬·¡½º¸¦ ½ÖÀ¸·Î ÀúÀå
+    private Map commandMap = new HashMap();
 
-    //¸í·É¾î¿Í Ã³¸®Å¬·¡½º°¡ ¸ÅÇÎµÇ¾î ÀÖ´Â properties ÆÄÀÏÀ» ÀĞ¾î¼­ Map°´Ã¼ÀÎ commandMap¿¡ ÀúÀå
-	//¸í·É¾î¿Í Ã³¸®Å¬·¡½º°¡ ¸ÅÇÎµÇ¾î ÀÖ´Â properties ÆÄÀÏÀº MvcProperty.propertiesÆÄÀÏ
     public void init(ServletConfig config) throws ServletException { 
         String props = config.getInitParameter("property");
-        //web.xml¿¡¼­ propertyConfig¿¡ ÇØ´çÇÏ´Â init-param ÀÇ °ªÀ» ÀĞ¾î¿È
         Properties pr = new Properties();
-        //¸í·É¾î¿Í Ã³¸®Å¬·¡½ºÀÇ ¸ÅÇÎÁ¤º¸¸¦ ÀúÀåÇÒ Properties°´Ã¼ »ı¼º
         FileInputStream f = null;
         try{
             f = new FileInputStream(props); 
-            //MvcProperty.propertiesÆÄÀÏÀÇ ³»¿ëÀ» ÀĞ¾î¿È
             pr.load(f);
-            //Command.propertiesÆÄÀÏÀÇ Á¤º¸¸¦  Properties°´Ã¼¿¡ ÀúÀå
         }catch (IOException e){
             throw new ServletException(e);
         }finally{
             if(f != null) try { f.close(); } catch(IOException ex) {}
         }
-        Iterator keyIter = pr.keySet().iterator();//Iterator°´Ã¼´Â Enumeration°´Ã¼¸¦ È®Àå½ÃÅ² °³³äÀÇ °´Ã¼
-        while(keyIter.hasNext()){//°´Ã¼¸¦ ÇÏ³ª¾¿ ²¨³»¼­ ±× °´Ã¼¸íÀ¸·Î Properties°´Ã¼¿¡ ÀúÀåµÈ °´Ã¼¿¡ Á¢±Ù
+        Iterator keyIter = pr.keySet().iterator();
+        while(keyIter.hasNext()){
             String command = (String)keyIter.next();
             String className = pr.getProperty(command);
             try{
-                Class commandClass = Class.forName(className);//ÇØ´ç ¹®ÀÚ¿­À» Å¬·¡½º·Î ¸¸µç´Ù.
-                Object commandInstance = commandClass.newInstance();//ÇØ´çÅ¬·¡½ºÀÇ °´Ã¼¸¦ »ı¼º
-                commandMap.put(command, commandInstance);// Map°´Ã¼ÀÎ commandMap¿¡ °´Ã¼ ÀúÀå
+                Class commandClass = Class.forName(className);
+                Object commandInstance = commandClass.newInstance();
+                commandMap.put(command, commandInstance);
             }catch (Exception e){
-                System.out.println("¿¡·¯³×");
+                System.out.println("ì˜ˆì™¸ ë°œìƒ.");
             }
         }
     }

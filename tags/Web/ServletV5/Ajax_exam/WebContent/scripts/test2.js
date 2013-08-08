@@ -15,6 +15,7 @@ function createRequest() {
   return request;
 }
 
+// 자동화
 function test2() {	  
 	  request = createRequest();
 	  if (request == null)

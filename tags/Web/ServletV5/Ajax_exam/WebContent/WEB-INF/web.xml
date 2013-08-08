@@ -13,7 +13,7 @@
   
   <servlet-mapping>
     <servlet-name>BBSCommand</servlet-name>
-    <url-pattern>*.ktds</url-pattern>
+    <url-pattern>*.hs</url-pattern>
   </servlet-mapping>  
   
     
