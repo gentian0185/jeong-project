@@ -1,9 +1,8 @@
 This Program make use of Servlet to Board Realization Program
-ServletV5/BBSExampleV2_ajax    is implement comment of ajax
 
 
 본 프로그램은 JSP & Servlet 을 이용한 게시판 프로그램입니다.
-ServletV5는 ajax를 이용한 코멘트 구현을 추가하였습니다.
+ServletV5는 ajax를 이용한 코멘트 구현을 추가할 예정입니다.
 
 
 -----------------------------------------------------
@@ -29,6 +28,3 @@ ServletV5는 ajax를 이용한 코멘트 구현을 추가하였습니다.
 
 Blog 
 		http://blog.naver.com/PostList.nhn?blogId=sdahhj&from=postList&categoryNo=30
-		
-		
-		
