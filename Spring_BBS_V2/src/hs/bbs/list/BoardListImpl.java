@@ -6,18 +6,23 @@ import hs.bbs.dao.BoardVO;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BoardListImpl {
 	String TAG = "BoardListImpl";
-
+	
 	@RequestMapping("/list.hs")
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
-
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+		        .getRequestAttributes()).getRequest();
 		DEFINE.printTAG(TAG, " : hansung");
 
 		// DB 데이타 변수.
@@ -30,7 +35,8 @@ public class BoardListImpl {
 		int pageBlock = 10;
 		Page page = null;
 		String pageNum = null;
-		// String pageNum = req.getParameter("pageNum");
+	
+		  pageNum = request.getParameter("pageNum");
 		if (pageNum == null)
 			pageNum = "1";
 
