@@ -14,6 +14,10 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.hs</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<!-- init param으로 이름을 지정해주지 않으면 설정파일이 기본값으로 "servlet-name"-servlet.xml이 된다. -->

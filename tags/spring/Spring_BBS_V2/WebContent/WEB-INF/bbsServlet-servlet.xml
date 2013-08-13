@@ -5,7 +5,7 @@
 
 	<bean id="testbean" class="com.bbs.spring.TestImpl" />
 	<bean id="listbean" class="hs.bbs.list.BoardListImpl" />
-	<!-- 
+	
 	<bean id="writeFormbean" class="hs.bbs.article.WriterFormImpl" />
 	<bean id="writebean" class="hs.bbs.article.WriteImpl" />
 	<bean id="contentbean" class="hs.bbs.article.ContentImpl" />
@@ -16,7 +16,8 @@
 	<bean id="deleteFormbean" class="hs.bbs.article.DeleteImpl" />
 	<bean id="replyFormbean" class="hs.bbs.article.ReplyFormImpl" />
 	<bean id="replybean" class="hs.bbs.article.ReplyImpl" />
-	 -->
+	
+	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value = "/"/>
 		<property name="suffix" value = ".jsp"/>

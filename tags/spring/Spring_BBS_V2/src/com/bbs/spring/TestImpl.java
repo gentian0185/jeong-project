@@ -10,7 +10,6 @@ public class TestImpl {
 	public ModelAndView add(){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("add","목이 아파요");
-		System.out.println(mav.getViewName());
 
 	    //bbsServlet-servlet.xml의 viewResolver bean의
 		//prefix, suffix에 의해 /"인자값".jsp 가 이름값으로 지정된다.
@@ -34,4 +33,13 @@ public class TestImpl {
 		return mav;
 	}
 }
+
+@Controller
+	@RequestMapping("/vv.hs")
+	ModelAndView 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("add",ddafsdf);
+		mav.setViewName("test");
+		return mav;
+
 */

@@ -9,11 +9,11 @@
 <title>Log-in 화면</title>
 </head>
 <body>
-	<form action="/BBSExampleV2/login.hs" method="post">
+	<form action="/Spring_BBS_V1/login.hs" method="post">
 		I D : <input type="text" name="id"><br> PASS : <input
 			type="text" name="pass"><br> <input type="submit" value="확인">
-		<input type="reset" value="취소" onclick="'/BBSExampleV2/list.hs?pageNum=${pageNum}'"> <a
-			href="/BBSExampleV2/memberJoin.jsp">회원가입</a>
+		<input type="reset" value="취소" onclick="'/Spring_BBS_V1/list.hs?pageNum=${pageNum}'"> <a
+			href="/Spring_BBS_V1/memberJoin.jsp">회원가입</a>
 	</form><br>
 </body>
 </html>
