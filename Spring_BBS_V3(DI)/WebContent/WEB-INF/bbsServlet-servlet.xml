@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean id ="dataSource" class="hs.bbs.dao.BBSDao"></bean>
+
+	<!-- testbean이 아닌 test로 하면 실행할때 이게 또 실행되는 불상사가..ㅎ.ㅎ -->
+	<bean id="testbean" class="com.bbs.spring.TestImpl" />
+	<bean id="listbean" class="hs.bbs.list.BoardListImpl">
+	<!--<constructor-arg ref="dataSource"/>  -->
+		<constructor-arg>
+			<ref bean="dataSource" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="writeFormbean" class="hs.bbs.article.WriterFormImpl">
+	</bean>
+	<bean id="writebean" class="hs.bbs.article.WriteImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="contentbean" class="hs.bbs.article.ContentImpl">
+		<property name="dataSource" ref="dataSource">
+		</property>
+	</bean>
+	
+	<bean id="loginbean" class="hs.bbs.login.LoginImpl" >
+	<constructor-arg ref="dataSource"/>
+	</bean>
+	
+	<bean id="logoutbean" class="hs.bbs.login.LogoutImpl" >
+	</bean>
+	<bean id="updateFormbean" class="hs.bbs.article.UpdateFormImpl" >
+	<constructor-arg ref="dataSource"/>
+	</bean>
+	<bean id="updatebean" class="hs.bbs.article.UpdateImpl" >
+	<constructor-arg ref="dataSource"/>
+	</bean>
+	<bean id="deleteFormbean" class="hs.bbs.article.DeleteImpl">
+	<constructor-arg ref="dataSource"/>
+	</bean>
+	<bean id="replyFormbean" class="hs.bbs.article.ReplyFormImpl">
+	</bean>
+	<bean id="replybean" class="hs.bbs.article.ReplyImpl" >
+	<constructor-arg ref="dataSource"/>
+	</bean>
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value = "/"/>
+		<property name="suffix" value = ".jsp"/>
+	</bean>
+</beans>
