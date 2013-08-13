@@ -28,13 +28,6 @@ public class UpdateImpl {
 
 		DEFINE.printTAG(TAG, " : hansung");
 
-//
-//		int article_num = Integer.parseInt(req.getParameter("article_num"));
-//		String pageNum = req.getParameter("pageNum");
-//		String title = req.getParameter("title");
-//		String content = req.getParameter("content");
-//		String file_name = req.getParameter("file_name");
-
 		try {
 			bbsDaoService.Update(article.getArticle_num(), article.getTitle(), article.getContent(), article.getFile_name());
 		} catch (Exception e) {

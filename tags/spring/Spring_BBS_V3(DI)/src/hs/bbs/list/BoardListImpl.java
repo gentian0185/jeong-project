@@ -50,12 +50,8 @@ public class BoardListImpl {
 			page = new Page(Integer.parseInt(pageNum), count, pageSize,
 					pageBlock);
 			pageCode = page.getSb().toString();
-			// arrayList = bbsDao.getAllartticle();
-
 			arrayList = bbsDaoService.List(page.getStartRow(), page.getEndRow());
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			DEFINE.printTAG(TAG, e.toString());
 			e.printStackTrace();
 		}
