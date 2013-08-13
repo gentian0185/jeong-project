@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/BBSExampleV2/reply.hs" method="post">
+	<form action="/Spring_BBS_V1/reply.hs" method="post">
 		<input type="hidden" name="id" value="${id }">
 		<input type="hidden" name="pageNum" value="${pageNum }">
 		<input type="hidden" name="depth" value="${depth }">
@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="답글달기"></td>
-				<td><input type="reset" value="취소" onclick="document.location.href='/BBSExampleV2/list.hs?${pageNum}'"></td>
+				<td><input type="reset" value="취소" onclick="document.location.href='/Spring_BBS_V1/list.hs?${pageNum}'"></td>
 			</tr>
 		</table>
 	</form>

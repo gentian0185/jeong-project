@@ -13,7 +13,7 @@
 		<table width="700">
 			<tr>
 				<td align="left">ID : ${id }</td>
-				<td align="right"><a href="logout.jsp">로그아웃 </a><a href="/BBSExampleV2/writeForm.hs"> 글쓰기 </a></td>
+				<td align="right"><a href="logout.jsp">로그아웃 </a><a href="/Spring_BBS_V1/writeForm.hs"> 글쓰기 </a></td>
 			</tr>
 		</table>
 
@@ -46,7 +46,7 @@
 						</c:if> <c:if test="${ article.depth == 0}">
 							<img src="images/level.gif" width="0" height="16">
 						</c:if> <!-- article_num 등을 입력받을때 공백 포함시키면 안된다!!!! -->
-						<a href="/BBSExampleV2/content.hs?article_num=${article.article_num }&pageNum=${pageNum}">
+						<a href="/Spring_BBS_V1/content.hs?article_num=${article.article_num }&pageNum=${pageNum}">
 							${article.title }</a> <c:if test="${ article.hit >= 20}">
 							<img src="images/hot.gif" border="0" height="16">
 						</c:if></td>

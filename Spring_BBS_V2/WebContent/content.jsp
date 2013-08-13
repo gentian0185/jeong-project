@@ -9,9 +9,9 @@
 </head>
 <body>
 	<!-- 수정 누를 경우  -->
-	<form action="/BBSExampleV2/replyForm.hs" method=post>
-		<input type="hidden" name="pageNum" value="${pageNum }"> <input
-			type="hidden" name="article_num" value="${oneArticle.article_num }">
+	<form action="/Spring_BBS_V1/replyForm.hs" method=post>
+		<input type="hidden" name="pageNum" value="${pageNum }">
+		<input type="hidden" name="article_num" value="${oneArticle.article_num }">
 		<input type="hidden" name="depth" value="${oneArticle.depth }">
 		<input type="hidden" name="group_id" value="${oneArticle.group_id }">
 		<input type="hidden" name="pos" value="${oneArticle.pos }">
@@ -36,7 +36,7 @@
 			<tr>
 				<td colspan="2">다운로드</td>
 				<td colspan="2"><a
-					href="/BBSExampleV2/download?file_name=${oneArticle.file_name }">${oneArticle.file_name }</a></td>
+					href="/Spring_BBS_V1/download?file_name=${oneArticle.file_name }">${oneArticle.file_name }</a></td>
 			</tr>
 			<tr>
 				<td colspan="4"><xmp>${oneArticle.content }</xmp></td>
@@ -47,15 +47,15 @@
 						value="답글달기"> <c:if test="${id ==oneArticle.id }">
 							<!-- id가 있으면 답글만 나오고 아이디가 같으면 수정 삭제 가능. 같지 않으면 수정 삭제 가능. 모두 목록으로 가능. -->
 							<input type="button" value="수정하기" name="article_num" value="${oneArticle.article_num }"
-								onclick="document.location.href='/BBSExampleV2/updateForm.hs?article_num=${oneArticle.article_num }'">
+								onclick="document.location.href='/Spring_BBS_V1/updateForm.hs?article_num=${oneArticle.article_num }&pageNum=${pageNum}'">
 							<input type="button" value="삭제하기" name="article_num"
-								onclick="document.location.href='/BBSExampleV2/deleteForm.hs?article_num=${oneArticle.article_num }'">
+								onclick="document.location.href='/Spring_BBS_V1/deleteForm.hs?article_num=${oneArticle.article_num }&pageNum=${pageNum}'">
 	
 						</c:if> <c:if test="${id != oneArticle.id }">
 							<input type="button" value="수정하기" disabled="disabled">
 							<input type="button" value="삭제하기" disabled="disabled">
 						</c:if> <input type="button" value="목록으로"
-						onclick="document.location.href='/BBSExampleV2/list.hs?pageNum=${pageNum}'">
+						onclick="document.location.href='/Spring_BBS_V1/list.hs?pageNum=${pageNum}'">
 					</td>
 				</c:if>
 				<c:if test="${id ==null }">
@@ -64,7 +64,7 @@
 						value="수정하기" disabled="disabled"> <input type="button"
 						value="삭제하기" disabled="disabled"> <input type="button"
 						value="목록으로"
-						onclick="document.location.href='/BBSExampleV2/list.hs?pageNum=${pageNum}'"></td>
+						onclick="document.location.href='/Spring_BBS_V1/list.hs?pageNum=${pageNum}'"></td>
 				</c:if>
 			</tr>
 		</table>

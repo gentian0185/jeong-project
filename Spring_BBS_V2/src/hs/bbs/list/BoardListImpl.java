@@ -35,7 +35,7 @@ public class BoardListImpl {
 		Page page = null;
 		String pageNum = null;
 	
-		  pageNum = req.getParameter("pageNum");
+		pageNum = req.getParameter("pageNum");
 		if (pageNum == null)
 			pageNum = "1";
 

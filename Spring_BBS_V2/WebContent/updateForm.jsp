@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/BBSExampleV2/update.hs" method="post">
+<form action="/Spring_BBS_V1/update.hs" method="post">
 		<input type="hidden" name="article_num" value="${article.article_num }"> 
 		<input type="hidden" name="pageNum" value="${pageNum }">
 		<table border="2" width="200">
@@ -31,7 +31,7 @@
 			<tr>
 				<td><input type="submit" value="수정하기"></td>
 				<td><input type="reset" value="수정 취소"
-					onclick="document.location.href='/BBSExampleV2/list.hs'"></td>
+					onclick="document.location.href='/Spring_BBS_V1/list.hs'"></td>
 			</tr>
 		</table>
 	</form>

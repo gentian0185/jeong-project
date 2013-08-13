@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/BBSExampleV2/write.hs" method="post" enctype="multipart/form-data">
+	<!-- <form action="/Spring_BBS_V1/write.hs" method="post" enctype="multipart/form-data">-->
+	<form action="/Spring_BBS_V1/write.hs" method="post">
 		<input type="hidden" name="id" value="${id }">
 		
 		<table border="2" width="200">
@@ -30,7 +31,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="글쓰기"></td>
-				<td><input type="reset" value="글쓰기취소" onclick="document.location.href='/BBSExampleV2/list.hs'"></td>
+				<td><input type="reset" value="글쓰기취소" onclick="document.location.href='/Spring_BBS_V1/list.hs'"></td>
 			</tr>
 		</table>
 	</form>
