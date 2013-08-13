@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Spring_BBS_V1</display-name>
+
+	<!-- 이것만 설정해주면 나중에 따로 한글 설정을 할 필요가 없다. -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.hs</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<!-- init param으로 이름을 지정해주지 않으면 설정파일이 기본값으로 "servlet-name"-servlet.xml이 된다. -->
+		<servlet-name>bbsServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- dispatcher servlet 이 servlet-class 에 들어간다 -->
+	</servlet>
+	<!-- servlet-mapping 적용 -->
+	<servlet-mapping>
+		<servlet-name>bbsServlet</servlet-name>
+		<url-pattern>*.hs</url-pattern>
+	</servlet-mapping>
+</web-app>
