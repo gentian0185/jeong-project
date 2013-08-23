@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- 필수라네 !!!! -->
+	<context:annotation-config />
+
+	<!-- MappingJacksonHttpMessageConverter 를 생략해도 클러이언트 단으로 -->
+	<!-- 값은 넘어감...Object형태로 넘어감...클라이언트에서 JSON.parse로 -->
+	<!-- 파싱하지않고 바로 받아서 처리 가능함... 단 한글이 깨짐 -->
+	<!-- 파싱에 관한 부분 정리 -->
+
+	<!-- 3.2이후에는 RequestMappingHandlerAdapter를 사용 -->
+	<!-- AnnotationMethodHandlerAdapter는 deprecated 됨 -->
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter " />
+			</list>
+		</property>
+	</bean>
+
+<!-- 	<bean -->
+<!-- 		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"> -->
+<!-- 		<property name="objectMapper" ref="jaxbJacksonObjectMapper" /> -->
+<!-- 	</bean> -->
+	<bean id="comment" class="hs.bbs.comment.CommentImpl">
+	</bean>
+
+</beans>
+
+
+<!-- 1. ModelAndView -->
+
+<!-- mav.addObject("key",  모든글) -->
+<!-- mav.setViewName("Json")  -->
+
+
+
+<!-- comment-servelt.xml 에 bean name view resolve가 동작되어서  Json에 해당하는 빈을 찾아서  -->
+
+<!-- 해당 클래스가 작동된다. -->
+
+<!-- 그 클래스를 mappingjacsonjsonview에 매핑시킨다.   - JsonView -->
+
+
+<!-- 그러면 클라이언트에서 보낼때 key, ..........로 받는다. -->
+
+<!-- data.key 하면 값이 딱 읽어진다. -->
+
+
+
+
+
+<!-- 2.  -->
+
+
+<!-- @JsonSerialized("클래스")를 이용하면 날짜자료를 바꿀 수 있다. -->
+<!-- comment 메소드 위에다가. 음..? -->
+<!-- 선언을 해준 commentVO에 이 값을 지정하고 이값을 변환해줄 클래스를 지정해 준다.  -->
+<!-- 클래스를 하나 만들어두면 적용하여 바꿔준다, -->

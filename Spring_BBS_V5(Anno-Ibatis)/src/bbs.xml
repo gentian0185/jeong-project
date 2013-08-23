@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD sql Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="article" type="hs.bbs.dao.BoardVO"/>
+
+	<select id="getCount" resultClass="int">
+		select count(*) from board
+	</select>
+	
+	<!-- 원래 쓰던 방법보다 안좋음. 데이터를 다 불러오기 때문. 테이블에 글이 많으면 성능이 많이 느려질걸. -->
+	<select id="List" resultClass="article">
+		select * from board order by group_id desc, pos
+	</select>
+	
+	<!-- 넘어온 값 클래스 : 스트링, 값 넘겨줄거는 String.  ?도 있지만 보안상 안좋아서 # 씀.-->
+	<select id="getPass" parameterClass="String" resultClass="String">
+		select pass from user_table where id=#id#
+	</select>
+	
+	<!-- 파일 이름의 경우 getOriginalFilename이 아닌 그냥 originalFilename하면 된다. -->
+	<insert id="Write" parameterClass="article" >
+<!-- 		insert into board values (board_seq.nextval, #id#, #title#, #content#, board_seq.currval , 0,0,0, sysdate , #springfile_name.originalFilename:VARCHAR:NO_ENTRY#) -->
+			insert into board values (board_seq.nextval, #id#, #title#, #content#, board_seq.currval , 0,0,0, sysdate , #springfile_name.originalFilename#)
+	</insert>
+	
+	<select id="Content" parameterClass="int" resultClass="article" >
+			select * from board where article_num = #article_num#
+	</select>
+	<update id="upHit" parameterClass="int" >
+			update board set hit = hit +1 where article_num= #article_num#
+	</update>
+	
+	<select id="reply" parameterClass="int" resultClass="article" >
+			insert into board values (board_seq.nextval,#id#,#title#,#content#,#group_id#,#pos#+1,#depth#+,0,sysdate,#file_name#)
+<!-- 		query.append("insert into board values "); -->
+<!-- 		query.append("(board_seq.nextval,?,?,?,?,?,?,0,sysdate,?)"); -->
+	</select>
+	<update id="upPos" parameterClass="HashMap" >
+			update board set pos=pos+1 where group_id= #group_id# and pos>#pos#
+	</update>
+	
+	
+	<update id="Update" parameterClass="HashMap" >
+			update board set title= #title#, content = #content# where article_num = #article_num#
+	</update>
+	<delete id="Delete" parameterClass="int">
+			delete from board where article_num=#article_num#
+	</delete>
+	
+	
+<!-- 	<select id="getAllComment" parameterClass="int" resultClass="comment"> -->
+<!-- 	   select * from bbs_comment  -->
+<!-- 	   where article_num=#article_num# order by comment_num desc -->
+<!-- 	</select> -->
+	
+<!-- 	<insert id="insertComment" parameterClass="HashMap">	 -->
+<!-- 	  insert into bbs_comment values(comment_seq.nextval,#comm_content#,sysdate,#article_num#) -->
+<!-- 	</insert> -->
+	
+
+</sqlMap>
+
+<!-- // Board 테이블의 모든 정보를 VO에 입력. -->
+
+<!-- 	// Board 테이블의 한 레이블의 삽입 쿼리문을 DB에 입력. (ID, Title, Content, FileName 필요.) -->
+<!-- 	// file_name의 경우 다음코딩때 조심해야 할듯.. 예외처리 만들어야할듯. -->
+<!-- 	@Override -->
+<!-- 	public void Write(BoardVO article) { -->
+<!-- 		// TODO Auto-generated method stub -->
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("insert into board "); -->
+<!-- 		query.append("values (board_seq.nextval, ?, ?, ?, board_seq.currval , 0,0,0, sysdate , ?)"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+<!-- 		System.out.println(" 1 "+ article.getId()); -->
+<!-- 		System.out.println("2 "+article.getTitle()); -->
+<!-- 		System.out.println(" 3 "+article.getContent()); -->
+<!-- 		System.out.println(" 4 "+ article.getFile_name().getOriginalFilename()); -->
+<!-- 		sqlMapClientTemplate.update(query.toString(),article.getId(),article.getTitle(), article.getContent(), article.getFile_name().getOriginalFilename() ); -->
+<!-- 	} -->
+	
+<!-- 	// 게시판 하나만 자세히 보기 -->
+<!-- 	@Override -->
+<!-- 	public BoardVO Content(int article_num) { -->
+<!-- 		// TODO Auto-generated method stub -->
+<!-- 		DEFINE.printTAG(TAG, "article_num is : "+article_num); -->
+<!-- 		addCount(article_num); -->
+
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("select * from board where article_num = ?"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+		
+<!-- 		return sqlMapClientTemplate.queryForObject(query.toString(), new Object[]{article_num}, new BoardVORowMapper()); -->
+<!-- 	} -->
+<!-- 	private void addCount(int article_num) { -->
+<!-- 		// TODO Auto-generated method stub -->
+<!-- 		DEFINE.printTAG(TAG, article_num); -->
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("update board set hit = hit +1 where article_num= ? "); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+		
+<!-- 		sqlMapClientTemplate.update(query.toString(), article_num); -->
+<!-- 	} -->
+	
+
+
+<!-- 	// 비밀번호 검사 -->
+<!-- 	@Override -->
+<!-- 	public List<String> getPass(String id) { -->
+<!-- 		// TODO Auto-generated method stub -->
+<!-- 		List<String> pass = null; -->
+		
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("select pass from user_table where id = ?"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+
+<!-- 		pass = sqlMapClientTemplate.queryForList(query.toString(), new Object[]{id}, String.class); -->
+		
+<!-- 		//없을경우 null이 들어가야 하니까. 바로 반환하지 않음. -->
+<!-- 		return pass; -->
+<!-- 	} -->
+	
+<!-- 	/* -->
+<!-- 	public String getPass(String id) { -->
+<!-- 		// TODO Auto-generated method stub -->
+<!-- 		String pass = null; -->
+		
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("select pass from user_table where id = ?"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+
+<!-- 		pass = sqlMapClientTemplate.queryForObject(query.toString(), new Object[]{id}, String.class); -->
+<!-- 		//없을경우 null이 들어가야 하니까. 바로 반환하지 않음. -->
+<!-- 		return pass; -->
+<!-- 	} -->
+<!-- 	*/ -->
+	
+
+<!-- 	// 글 수정 -->
+<!-- 	@Override -->
+<!-- 	public void Update(int article_num, String title, String content, -->
+<!-- 			String file_name) { -->
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("update board set title= ?, content = ? , file_name =?, write_date = sysdate where article_num = ?"); -->
+<!-- 		sqlMapClientTemplate.update(query.toString(), title, content, file_name, article_num); -->
+<!-- 	} -->
+
+<!-- 	@Override -->
+<!-- 	public void Delete(int article_num) { -->
+<!-- 		// TODO Auto-generated method stub -->
+		
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("delete from board where article_num=?"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+		
+<!-- 		sqlMapClientTemplate.update(query.toString(), article_num); -->
+<!-- 	} -->
+
+<!-- 	@Override -->
+<!-- 	public void Reply(BoardVO article) { -->
+<!-- 		// TODO Auto-generated method stub -->
+
+<!-- 		setPosForReply(article); -->
+
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("insert into board values "); -->
+<!-- 		query.append("(board_seq.nextval,?,?,?,?,?,?,0,sysdate,?)"); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+		
+
+<!-- 		sqlMapClientTemplate.update(query.toString(), article.getId(), article.getTitle(), article.getContent(), article.getGroup_id(), article.getPos() + 1, article.getDepth() + 1, article.getFile_name()); -->
+<!-- 	} -->
+
+<!-- 	private void setPosForReply(BoardVO article) { -->
+<!-- 		// TODO Auto-generated method stub -->
+
+<!-- 		StringBuffer query = new StringBuffer(); -->
+<!-- 		query.append("update board "); -->
+<!-- 		query.append("set pos=pos+1  "); -->
+<!-- 		query.append("where group_id= ? and pos>? "); -->
+<!-- 		DEFINE.printTAG(TAG, "query is : " + query); -->
+	
+<!-- 		sqlMapClientTemplate.update(query.toString(), article.getGroup_id(), article.getPos()); -->
+
+<!-- 	} -->
+
+
+
+	
+	
+	
+	
+	

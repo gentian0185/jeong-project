@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<!-- context 엘리먼트는 공통으로 사용못함.  여기서만 사용된다. DB때문에 필수이다. -->
+	<context:annotation-config />
+	<!-- 커넥션 풀을 지원해줌. 스프링의 dataSource는 지원을 안해준다. -->
+	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE" p:username="bbs"
+		p:password="1234" />
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" p:configLocation="WEB-INF/sqlMapConfig.xml">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+ 	
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate" p:sqlMapClient-ref="sqlMapClient"/>
+
+	<bean id="bbsDao" class="hs.bbs.dao.BBSDao">
+	</bean>
+</beans>
